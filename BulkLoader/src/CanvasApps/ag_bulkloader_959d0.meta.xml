@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>ag_bulkloader_959d0</Name>
+  <AppVersion>2026-09-04T16:43:09Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.26084.7.0</CreatedByClientVersion>
+  <MinClientVersion>3.26084.7.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.26084.7","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"true","isUnifiedRootApp":"false","sienaVersion":"20260728T175104Z-3.26072.8.0","m365CopilotSettingValue":"0"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
+  <DisplayName>Bulk Loader</DisplayName>
+  <Description xsi:nil="true"></Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher xsi:nil="true"></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{"526213f3-afe3-4d7b-a143-0f682ee60e5e":{"id":"/providers/microsoft.powerapps/apis/shared_sql","xrmConnectionReferenceLogicalName":"new_sharedsql_3218f","displayName":"SQL Server","executionRestrictions":{"version":2,"modifiedOn":"2026-09-04 16:43:05","appVer":"3.26084.7","apiId":"/providers/microsoft.powerapps/apis/shared_sql","apiVer":2,"policy":"{\"tabularActions\":{\"[dbo].[vw_supplier]\":[\"get\"],\"[dbo].[vw_year]\":[\"get\"],\"[dbo].[vw_itemtype]\":[\"get\"],\"[dbo].[uploadlog]\":[\"post\",\"patch\",\"get\"],\"[dbo].[sales_staging]\":[\"post\",\"patch\",\"get\"],\"[dbo].[sales_errors]\":[\"get\"],\"[dbo].[sales_duplicates]\":[\"get\"],\"[dbo].[vw_batchids]\":[\"get\"]},\"serviceActions\":[\"dbo.sp_getstaging_filtered_paged\",\"dbo.sp_insert_staging_to_main\",\"dbo.sp_get_sales_record_counts\",\"dbo.sp_dashboard_kpis\",\"dbo.sp_getsalesmain_filtered_paged\",\"dbo.sp_getsalesduplicates_filtered_paged\",\"dbo.sp_getsaleserrors_filtered_paged\"]}"},"iconUri":"https://static.powerapps.com/resource/ppcr/releases/v1.0.1823/1.0.1823.4867/sql/icon.png","dataSources":["Sales_Duplicates","Sales_Errors","Sales_Main","Sales_Staging","Sales_UploadLog","UploadLog","vw_ItemType","VW_Staging","vw_Month","vw_Year","vw_Supplier","PowerAppDB","vw_BatchIds"],"dependencies":[],"dependents":["22912284-b9cd-4543-a03d-1a7fb4d35873"],"parameterHints":{},"parameterHintsV2":{},"gatewayObjectIdHint":"8d76fb3b-4757-413e-a8b5-cc15f134da11","isOnPremiseConnection":true,"sharedConnectionId":"38647be6-5263-4637-a216-a13e704ce429","bypassConsent":false,"dataSets":{"DESKTOP-1496N04%5cSQLEXPRESS,PowerAppDB":{"dataSources":{"Sales_Duplicates":{"tableName":"[dbo].[Sales_Duplicates]"},"Sales_Errors":{"tableName":"[dbo].[Sales_Errors]"},"Sales_Main":{"tableName":"[dbo].[Sales_Main]"},"Sales_Staging":{"tableName":"[dbo].[Sales_Staging]"},"Sales_UploadLog":{"tableName":"[dbo].[Sales_UploadLog]"},"UploadLog":{"tableName":"[dbo].[UploadLog]"},"vw_ItemType":{"tableName":"[dbo].[vw_ItemType]"},"VW_Staging":{"tableName":"[dbo].[VW_Staging]"},"vw_Month":{"tableName":"[dbo].[vw_Month]"},"vw_Year":{"tableName":"[dbo].[vw_Year]"},"vw_Supplier":{"tableName":"[dbo].[vw_Supplier]"},"PowerAppDB":{},"vw_BatchIds":{"tableName":"[dbo].[vw_BatchIds]"}}}},"apiTier":"Premium","actions":["providers/PowerPlatform.Governance/Operations/Read","providers/PowerPlatform.Governance/Operations/Write","ExecuteProcedure_V2"],"endpoints":["DESKTOP-1496N04%5cSQLEXPRESS,PowerAppDB"],"authenticationType":"sqlAuthentication"},"22912284-b9cd-4543-a03d-1a7fb4d35873":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://static.powerapps.com/resource/ppcr/releases/v1.0.1827/1.0.1827.4908/logicflows/icon.png","dataSources":["CSV_File_Upload"],"dependencies":["d0e021ad-e4a8-45b8-b7fc-19d6b9a05b1a","526213f3-afe3-4d7b-a143-0f682ee60e5e"],"dependents":[],"parameterHints":{"workflowName":{"value":"565e0f35-e557-47b5-9d82-75fc179e7e94"},"workflowEntityId":{"value":"d2a9fa8a-9220-f111-88b2-002248ebc84e"},"workflowDisplayName":{"value":"CSV_File_Upload"},"d0e021ad-e4a8-45b8-b7fc-19d6b9a05b1a":{"value":"shared_filesystem-1"},"526213f3-afe3-4d7b-a143-0f682ee60e5e":{"value":"shared_sql-1"}},"parameterHintsV2":{"workflowName":{"value":"565e0f35-e557-47b5-9d82-75fc179e7e94"},"workflowEntityId":{"value":"d2a9fa8a-9220-f111-88b2-002248ebc84e"},"workflowDisplayName":{"value":"CSV_File_Upload"},"shared_filesystem-1":{"value":"d0e021ad-e4a8-45b8-b7fc-19d6b9a05b1a"},"shared_sql-1":{"value":"526213f3-afe3-4d7b-a143-0f682ee60e5e"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"]},"d0e021ad-e4a8-45b8-b7fc-19d6b9a05b1a":{"id":"/providers/microsoft.powerapps/apis/shared_filesystem","displayName":"File System","iconUri":"https://static.powerapps.com/resource/ppcr/releases/v1.0.1823/1.0.1823.4874/filesystem/icon.png","dataSources":[],"dependencies":[],"dependents":["22912284-b9cd-4543-a03d-1a7fb4d35873"],"parameterHints":{},"parameterHintsV2":{},"gatewayObjectIdHint":"a1d13df2-beaa-42a8-88c9-855ea4f50a63","isOnPremiseConnection":true,"bypassConsent":false,"dataSets":{},"apiTier":"Standard"}}</ConnectionReferences>
+  <DatabaseReferences>{}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>0</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"dependencyid":"d2a9fa8a-9220-f111-88b2-002248ebc84e","componenttype":29,"componenttypeplatformname":"Workflow"},{"logicalname":"new_sharedsql_3218f","componenttype":10156,"componenttypeplatformname":"ConnectionReference"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/ag_bulkloader_959d0_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/ag_bulkloader_959d0_DocumentUri.msapp</DocumentUri>
+  <AdditionalUris>
+    <AdditionalUri>/CanvasApps/ag_bulkloader_959d0_AdditionalUris0_identity.json</AdditionalUri>
+  </AdditionalUris>
+</CanvasApp>

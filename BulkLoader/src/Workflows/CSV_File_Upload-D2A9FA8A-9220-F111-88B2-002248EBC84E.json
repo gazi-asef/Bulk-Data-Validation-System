@@ -1,0 +1,179 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_filesystem-1": {
+        "api": {
+          "name": "shared_filesystem"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "ag_BLFileSystemConnector"
+        },
+        "runtimeSource": "invoker"
+      },
+      "shared_sql-1": {
+        "api": {
+          "name": "shared_sql"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "ag_BlSQLServerConnector"
+        },
+        "runtimeSource": "invoker"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "undefined",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "PowerAppV2",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "file": {
+                  "description": "Please select file or image",
+                  "title": "UploadedFile",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "contentBytes": {
+                      "type": "string",
+                      "format": "byte"
+                    }
+                  },
+                  "x-ms-content-hint": "FILE",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "file"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "a751a9b1-4f65-4233-befd-1ac1a5e17e60"
+          }
+        }
+      },
+      "actions": {
+        "varFileName": {
+          "type": "Compose",
+          "inputs": "@concat(\r\n  replace(triggerBody()?['file']?['name'], '.csv', ''),\r\n  '_',\r\n  formatDateTime(utcNow(),'yyyyMMdd_HHmmss'),\r\n  '.csv'\r\n)\r\n",
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "14b7484e-9fc9-472d-ab7a-cab2692715a8"
+          }
+        },
+        "Create_file": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "folderPath": "C:\\CSV Files\\Uploads",
+              "name": "@outputs('varFileName')",
+              "body": "@triggerBody()?['file']?['contentBytes']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_filesystem",
+              "operationId": "CreateFile",
+              "connectionName": "shared_filesystem-1"
+            }
+          },
+          "runAfter": {
+            "varFileName": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "f76579da-7e7e-41fa-8627-a40a933c9c3d"
+          }
+        },
+        "Execute_stored_procedure_(V2)": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "server": "default",
+              "database": "default",
+              "procedure": "[dbo].[SP_LoadCSV_To_Staging_V3]",
+              "parameters/FilePath": "C:\\CSV Files\\Uploads\\@{outputs('varFileName')}"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sql",
+              "operationId": "ExecuteProcedure_V2",
+              "connectionName": "shared_sql-1"
+            }
+          },
+          "runAfter": {
+            "Create_file": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7e88ffe9-fad7-4d23-a2c4-585b37803497"
+          }
+        },
+        "Respond_to_a_Power_App_or_flow": {
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "uploadbatchid": {
+                  "title": "UploadBatchId",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                },
+                "totalrows": {
+                  "title": "TotalRows",
+                  "x-ms-dynamically-added": true,
+                  "type": "number"
+                },
+                "validrows": {
+                  "title": "ValidRows",
+                  "x-ms-dynamically-added": true,
+                  "type": "number"
+                },
+                "duplicaterows": {
+                  "title": "DuplicateRows",
+                  "x-ms-dynamically-added": true,
+                  "type": "number"
+                }
+              },
+              "additionalProperties": {}
+            },
+            "statusCode": 200,
+            "body": {
+              "uploadbatchid": "@{first(outputs('Execute_stored_procedure_(V2)')?['body/ResultSets/Table1'])?['UploadBatchId']\r\n}",
+              "totalrows": "@first(outputs('Execute_stored_procedure_(V2)')?['body/ResultSets/Table1'])?['TotalRows']\r\n",
+              "validrows": "@first(outputs('Execute_stored_procedure_(V2)')?['body/ResultSets/Table1'])?['ValidRows']\r\n",
+              "duplicaterows": "@first(outputs('Execute_stored_procedure_(V2)')?['body/ResultSets/Table1'])?['DuplicateRows']\r\n"
+            }
+          },
+          "runAfter": {
+            "Execute_stored_procedure_(V2)": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e503c483-bf45-496a-9c48-3ab85560ed54"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}
